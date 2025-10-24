@@ -1,0 +1,66 @@
+﻿@model IEnumerable<BusinessObjects.NewsArticle>
+@{
+    ViewData["Title"] = "Home Page";
+    // Tách bài viết đầu tiên làm bài nổi bật
+    var featuredArticle = Model?.FirstOrDefault();
+    // Lấy các bài viết còn lại để hiển thị trong lưới
+    var latestNews = Model?.Skip(1);
+}
+
+<div class="container my-5">
+    @if (featuredArticle != null)
+    {
+        <div class="featured-article shadow">
+            <img src="@(string.IsNullOrEmpty(featuredArticle.NewsImageUrl) ? "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2070&auto=format&fit=crop" : featuredArticle.NewsImageUrl)" alt="Featured News Image">
+            <div class="featured-article-content">
+                <h1 class="display-5">
+                    <a asp-controller="Home" asp-action="Details" asp-route-id="@featuredArticle.NewsArticleId" class="text-white text-decoration-none">
+                        @featuredArticle.NewsTitle
+                    </a>
+                </h1>
+                <p class="lead">@featuredArticle.Headline</p>
+            </div>
+        </div>
+    }
+
+    <h2 class="section-title">Latest News</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @if (latestNews != null && latestNews.Any())
+        {
+            @foreach (var item in latestNews)
+            {
+                <div class="col">
+                    <div class="card h-100 news-card">
+                        <a asp-controller="Home" asp-action="Details" asp-route-id="@item.NewsArticleId">
+                            <img src="@(string.IsNullOrEmpty(item.NewsImageUrl) ? "https://images.unsplash.com/photo-1529243856184-fd5465488984?q=80&w=1974&auto=format&fit=crop" : item.NewsImageUrl)" class="card-img-top" alt="News Image">
+                        </a>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">
+                                <a asp-controller="Home" asp-action="Details" asp-route-id="@item.NewsArticleId" class="text-dark text-decoration-none">
+                                    @Html.DisplayFor(modelItem => item.NewsTitle)
+                                </a>
+                            </h5>
+                            <p class="card-text text-muted flex-grow-1">@Html.DisplayFor(modelItem => item.Headline)</p>
+                        </div>
+                        <div class="card-footer">
+                            <small>Published on: @(item.CreatedDate.HasValue? item.CreatedDate.Value.ToString("MMMM dd, yyyy") : "N/A")</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else if (Model?.Count() <= 1)
+        {
+            <div class="col-12">
+                <p class="text-center">No other news articles to display.</p>
+            </div>
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="text-center">No news articles found.</p>
+            </div>
+        }
+    </div>
+</div>

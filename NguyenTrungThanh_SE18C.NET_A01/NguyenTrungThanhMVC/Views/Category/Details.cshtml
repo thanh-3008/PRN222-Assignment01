@@ -1,0 +1,47 @@
+﻿@model BusinessObjects.Category
+
+@{
+    ViewData["Title"] = "Category Details";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="card">
+    <div class="card-header">
+        <h4>Information for @Model.CategoryName</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.CategoryId)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.CategoryName)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.CategoryDesciption)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.CategoryDesciption)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IsActive)
+            </dt>
+            <dd class="col-sm-9">
+                @(Model.IsActive == true ? "Active" : "Inactive")
+            </dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>

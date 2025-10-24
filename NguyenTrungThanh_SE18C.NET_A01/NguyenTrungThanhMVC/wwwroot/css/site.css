@@ -1,0 +1,261 @@
+﻿:root {
+    --primary-color: #0d6efd; /* Bootstrap Primary Blue */
+    --secondary-color: #6c757d; /* Bootstrap Secondary Gray */
+    --light-bg: #f8f9fa;
+    --dark-bg: #212529;
+    --card-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    --card-hover-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    --border-radius: 0.75rem;
+}
+
+/* Global Styles */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-bg);
+    color: #333;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+.main-content {
+    min-height: calc(100vh - 120px); /* Adjust based on header/footer height */
+}
+
+/* Featured Article (Hero) Section */
+.featured-article {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    position: relative;
+    color: white;
+    margin-bottom: 3rem;
+}
+
+    .featured-article img {
+        width: 100%;
+        height: 450px;
+        object-fit: cover;
+        display: block;
+    }
+
+.featured-article-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+    .featured-article-content h1 {
+        font-weight: 700;
+    }
+
+/* Section Title */
+.section-title {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-color);
+    display: inline-block;
+}
+
+/* News Card */
+.news-card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+}
+
+    .news-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--card-hover-shadow);
+    }
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+}
+
+.card-title {
+    font-weight: 600;
+    color: #222;
+}
+
+.card-text {
+    color: #555;
+}
+
+.card-footer {
+    background-color: transparent;
+    border-top: 1px solid #eee;
+    font-size: 0.85rem;
+    color: var(--secondary-color);
+}
+
+.login-page-bg {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2073&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Poppins', sans-serif;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 900px;
+    border: none;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.login-branding-panel {
+    background-image: linear-gradient(135deg, #fd7e14, #ffc107); /* Đây là dải màu cam - vàng mới */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.login-logo-wrapper {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--primary-color);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.login-form-panel {
+    padding: 3rem;
+    background-color: #fff;
+}
+
+.btn-home-login {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+/* Input group with icons styling */
+.input-group-text {
+    background-color: var(--light-bg);
+    border-right: none;
+    width: 45px;
+    justify-content: center;
+}
+
+.input-group .form-control {
+    border-left: none;
+}
+
+.profile-page .profile-card {
+    max-width: 800px;
+    margin: 0 auto;
+    border: none;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.profile-sidebar {
+    background-color: var(--dark-bg);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-avatar {
+    font-size: 80px; /* 5rem */
+    color: var(--primary-color);
+}
+
+.profile-content {
+    background-color: #fff;
+}
+
+.admin-card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    background-color: #fff;
+}
+
+    .admin-card .card-header {
+        background-color: transparent;
+        border-bottom: 1px solid #eee;
+        padding: 1rem 1.5rem;
+    }
+
+.admin-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    .admin-table thead th {
+        background-color: var(--dark-bg);
+        color: white;
+        border: none;
+        font-weight: 600;
+    }
+
+    .admin-table tbody td {
+        vertical-align: middle;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .admin-table tbody tr:hover {
+        background-color: #f8f9fa; /* --light-bg */
+    }
+
+/* Custom Badge Colors */
+.badge.bg-staff {
+    background-color: #0dcaf0 !important; /* Bootstrap Info */
+    color: #000;
+}
+
+.badge.bg-lecturer {
+    background-color: #6c757d !important; /* Bootstrap Secondary */
+}
+
+.badge.bg-published,
+.badge.bg-active {
+    background-color: #198754 !important; /* Bootstrap Success */
+}
+
+.badge.bg-draft,
+.badge.bg-inactive {
+    background-color: #6c757d !important; /* Bootstrap Secondary */
+}

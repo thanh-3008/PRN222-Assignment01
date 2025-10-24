@@ -1,0 +1,69 @@
+﻿@model IEnumerable<BusinessObjects.SystemAccount>
+
+@{
+    ViewData["Title"] = "Account Management";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<div class="container my-5">
+    <h1 class="mb-4 fw-bold">@ViewData["Title"]</h1>
+
+    <div class="card admin-card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-bold">User Account List</h5>
+                <div>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#form-modal" data-url="@Url.Action("Create")">
+                        <i class="fa-solid fa-plus me-1"></i> Create New
+                    </button>
+                    <a asp-action="Report" class="btn btn-info">
+                        <i class="fa-solid fa-chart-line me-1"></i> View Reports
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <table class="table admin-table mb-0">
+                <thead>
+                    <tr>
+                        <th class="ps-3">@Html.DisplayNameFor(model => model.AccountId)</th>
+                        <th>@Html.DisplayNameFor(model => model.AccountName)</th>
+                        <th>@Html.DisplayNameFor(model => model.AccountEmail)</th>
+                        <th>@Html.DisplayNameFor(model => model.AccountRole)</th>
+                        <th style="width: 20%;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="ps-3">@Html.DisplayFor(modelItem => item.AccountId)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AccountName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AccountEmail)</td>
+                            <td>
+                                @if (item.AccountRole == 1)
+                                {
+                                    <span class="badge bg-staff">Staff</span>
+                                }
+                                else if (item.AccountRole == 2)
+                                {
+                                    <span class="badge bg-lecturer">Lecturer</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#form-modal" data-url="@Url.Action("Edit", new { id = item.AccountId })">
+                                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                                    </button>
+                                    <a asp-action="Details" asp-route-id="@item.AccountId" class="btn btn-outline-info"><i class="fa-solid fa-circle-info"></i> Details</a>
+                                    <a asp-action="Delete" asp-route-id="@item.AccountId" class="btn btn-outline-danger"><i class="fa-solid fa-trash-can"></i> Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

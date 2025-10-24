@@ -1,0 +1,73 @@
+﻿@model IEnumerable<BusinessObjects.Category>
+
+@{
+    ViewData["Title"] = "Category Management";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<div class="container my-5">
+    <h1 class="mb-4 fw-bold">@ViewData["Title"]</h1>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    <div class="card admin-card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#form-modal" data-url="@Url.Action("Create")" data-title="Create New Category">
+                    <i class="fa-solid fa-plus me-1"></i> Create New Category
+                </button>
+                <form asp-action="Index" method="get" class="d-flex" style="max-width: 400px;">
+                    <input type="text" name="searchTerm" class="form-control me-2" placeholder="Search by category name..." value="@ViewData["CurrentFilter"]">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                    <a asp-action="Index" class="btn btn-secondary ms-2">Clear</a>
+                </form>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <table class="table admin-table mb-0">
+                <thead>
+                    <tr>
+                        <th class="ps-3" style="width: 10%;">@Html.DisplayNameFor(model => model.CategoryId)</th>
+                        <th>@Html.DisplayNameFor(model => model.CategoryName)</th>
+                        <th>@Html.DisplayNameFor(model => model.CategoryDesciption)</th>
+                        <th style="width: 10%;">@Html.DisplayNameFor(model => model.IsActive)</th>
+                        <th style="width: 20%;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="ps-3">@Html.DisplayFor(modelItem => item.CategoryId)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CategoryDesciption)</td>
+                            <td>
+                                @if (item.IsActive == true)
+                                {
+                                    <span class="badge bg-active">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-inactive">Inactive</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#form-modal" data-url="@Url.Action("Edit", new { id = item.CategoryId })" data-title="Edit Category">
+                                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                                    </button>
+                                    <a asp-action="Details" asp-route-id="@item.CategoryId" class="btn btn-outline-info"><i class="fa-solid fa-circle-info"></i> Details</a>
+                                    <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-outline-danger"><i class="fa-solid fa-trash-can"></i> Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

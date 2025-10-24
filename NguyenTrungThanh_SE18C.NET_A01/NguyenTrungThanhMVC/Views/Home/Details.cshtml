@@ -1,0 +1,45 @@
+﻿@model BusinessObjects.NewsArticle
+
+@{
+    ViewData["Title"] = Model.NewsTitle;
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <article>
+                <header class="mb-4">
+                    <h1 class="fw-bolder mb-1">@Model.NewsTitle</h1>
+                    <div class="text-muted fst-italic mb-2">
+                        Posted on @Model.CreatedDate?.ToString("MMMM dd, yyyy") by @(Model.CreatedBy?.AccountName ?? "N/A")
+                    </div>
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">@(Model.Category?.CategoryName ?? "Uncategorized")</a>
+                </header>
+                <section class="mb-5">
+                    @Html.Raw(Model.NewsContent)
+                </section>
+            </article>
+        </div>
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header">Tags</div>
+                <div class="card-body">
+                    @if (Model.NewsTags != null && Model.NewsTags.Any())
+                    {
+                        foreach (var newsTag in Model.NewsTags)
+                        {
+                            <a class="badge bg-info text-decoration-none link-light me-1" href="#!">@newsTag.Tag.TagName</a>
+                        }
+                    }
+                    else
+                    {
+                        <p>No tags for this article.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-4">
+        <a asp-action="Index" class="btn btn-secondary">← Back to News</a>
+    </div>
+</div>

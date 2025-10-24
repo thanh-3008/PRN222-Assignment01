@@ -1,0 +1,62 @@
+﻿@model BusinessObjects.NewsArticle
+
+@{
+    ViewData["Title"] = "Article Details";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="card">
+    <div class="card-header">
+        <h4>@Model.NewsTitle</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Category</dt>
+            <dd class="col-sm-9">@(Model.Category?.CategoryName ?? "N/A")</dd>
+
+            <dt class="col-sm-3">Author</dt>
+            <dd class="col-sm-9">@(Model.CreatedBy?.AccountName ?? "N/A")</dd>
+
+            <dt class="col-sm-3">Created Date</dt>
+            <dd class="col-sm-9">@Model.CreatedDate?.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Status</dt>
+            <dd class="col-sm-9">
+                @if (Model.NewsStatus == true)
+                {
+                    <span class="badge bg-success">Published</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">Draft</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">Tags</dt>
+            <dd class="col-sm-9">
+                @if (Model.NewsTags != null && Model.NewsTags.Any())
+                {
+                    foreach (var newsTag in Model.NewsTags)
+                    {
+                        <span class="badge bg-info me-1">@newsTag.Tag.TagName</span>
+                    }
+                }
+                else
+                {
+                    <span>No tags associated.</span>
+                }
+            </dd>
+
+            <hr class="my-3" />
+
+            <dt class="col-sm-12">Content</dt>
+            <dd class="col-sm-12">
+                @Html.Raw(Model.NewsContent)
+            </dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>

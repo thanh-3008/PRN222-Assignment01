@@ -1,0 +1,79 @@
+﻿@model NguyenTrungThanhMVC.Models.ReportViewModel
+@{
+    ViewData["Title"] = "News Articles Report";
+}
+
+<div class="container my-5">
+    <h1 class="mb-4 fw-bold">@ViewData["Title"]</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card admin-card">
+                <div class="card-header">
+                    <h5 class="mb-0 fw-bold">Select Date Range</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Report" method="post">
+                        <div class="row align-items-end g-3">
+                            <div class="col-md-5">
+                                <label asp-for="StartDate" class="form-label"></label>
+                                <input asp-for="StartDate" class="form-control" type="date" />
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-5">
+                                <label asp-for="EndDate" class="form-label"></label>
+                                <input asp-for="EndDate" class="form-control" type="date" />
+                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Generate</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div asp-validation-summary="ModelOnly" class="text-danger mt-2"></div>
+                    </form>
+                </div>
+            </div>
+
+            @if (Model.NewsArticles != null)
+            {
+                <div class="card admin-card mt-4">
+                    <div class="card-header">
+                        <h5 class="mb-0 fw-bold">Report Results (@Model.NewsArticles.Count entries found)</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        @if (Model.NewsArticles.Any())
+                        {
+                            <table class="table admin-table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="ps-3">Title</th>
+                                        <th>Author</th>
+                                        <th>Category</th>
+                                        <th>Created Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.NewsArticles)
+                                    {
+                                        <tr>
+                                            <td class="ps-3">@item.NewsTitle</td>
+                                            <td>@(item.CreatedBy?.AccountName ?? "N/A")</td>
+                                            <td>@(item.Category?.CategoryName ?? "N/A")</td>
+                                            <td>@item.CreatedDate?.ToString("dd/MM/yyyy")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <p class="text-center p-4">No news articles found in the selected period.</p>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
